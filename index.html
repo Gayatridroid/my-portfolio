@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gayatri Katole | Portfolio</title>
+    <style>
+      /* ---------- GLOBAL STYLES ---------- */
+      :root {
+        --bg-color: #0d0b20;
+        --card-bg: rgba(255, 255, 255, 0.1);
+        --accent: #b36fff;
+        --accent2: #66ccff;
+        --text-color: #f1f1f1;
+        --font-main: "Poppins", sans-serif;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: var(--font-main);
+        background: radial-gradient(circle at top left, #1a1133, #0b0618);
+        color: var(--text-color);
+        overflow-x: hidden;
+      }
+
+      /* ---------- NAVIGATION ---------- */
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 50px;
+        z-index: 1000;
+      }
+      nav h1 {
+        color: var(--accent);
+        font-size: 1.5rem;
+      }
+      nav ul {
+        display: flex;
+        gap: 25px;
+        list-style: none;
+      }
+      nav a {
+        text-decoration: none;
+        color: var(--text-color);
+        transition: 0.3s;
+      }
+      nav a:hover {
+        color: var(--accent);
+      }
+
+      /* ---------- HERO ---------- */
+      .hero {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        position: relative;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+          circle,
+          rgba(179, 111, 255, 0.2),
+          transparent 60%
+        );
+        z-index: -1;
+      }
+      .hero h1 {
+        font-size: 3rem;
+        color: var(--accent);
+        letter-spacing: 2px;
+      }
+      .hero h2 {
+        font-size: 1.5rem;
+        margin-top: 10px;
+      }
+      .typing {
+        border-right: 2px solid var(--accent);
+        white-space: nowrap;
+        overflow: hidden;
+        width: 0;
+        animation: typing 4s steps(40, end) forwards, blink 0.75s infinite;
+      }
+      @keyframes typing {
+        to {
+          width: 100%;
+        }
+      }
+      @keyframes blink {
+        50% {
+          border-color: transparent;
+        }
+      }
+      .hero button {
+        margin-top: 30px;
+        padding: 12px 30px;
+        border: none;
+        background: linear-gradient(45deg, var(--accent), var(--accent2));
+        color: #fff;
+        border-radius: 30px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: 0.3s ease;
+      }
+      .hero button:hover {
+        box-shadow: 0 0 20px var(--accent);
+        transform: scale(1.05);
+      }
+
+      /* ---------- SECTION CONTAINERS ---------- */
+      section {
+        padding: 100px 10%;
+      }
+      .section-title {
+        font-size: 2rem;
+        margin-bottom: 50px;
+        color: var(--accent);
+        text-align: center;
+      }
+
+      /* ---------- ABOUT ---------- */
+      .about-card {
+        background: var(--card-bg);
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 0 30px rgba(179, 111, 255, 0.2);
+        backdrop-filter: blur(20px);
+        transition: 0.5s;
+      }
+      .about-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 0 40px rgba(102, 204, 255, 0.3);
+      }
+      .about-card p {
+        line-height: 1.8;
+        font-size: 1.1rem;
+      }
+
+      /* ---------- SERVICES ---------- */
+      .services {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+        gap: 30px;
+      }
+      .service-card {
+        background: var(--card-bg);
+        border-radius: 15px;
+        padding: 30px;
+        text-align: center;
+        transition: 0.4s;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+      }
+      .service-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 30px var(--accent);
+      }
+      .service-card h3 {
+        margin: 15px 0;
+        color: var(--accent2);
+      }
+
+      /* ---------- RESUME ---------- */
+      .resume {
+        background: var(--card-bg);
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 0 30px rgba(102, 204, 255, 0.15);
+      }
+      .resume p,
+      .resume a {
+        font-size: 1rem;
+        color: var(--text-color);
+      }
+      .resume a {
+        color: var(--accent2);
+        text-decoration: none;
+      }
+
+      /* ---------- SKILLS ---------- */
+      .skills-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: center;
+      }
+      .skill-tag {
+        background: linear-gradient(45deg, var(--accent), var(--accent2));
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 20px;
+        font-weight: 500;
+        transition: 0.3s;
+      }
+      .skill-tag:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 20px var(--accent);
+      }
+
+      /* ---------- CERTIFICATES ---------- */
+      .certificates {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+      }
+      .certificate-card {
+        background: var(--card-bg);
+        border-radius: 15px;
+        padding: 15px;
+        overflow: hidden;
+        position: relative;
+        transition: 0.4s;
+        cursor: pointer;
+      }
+      .certificate-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 30px var(--accent2);
+      }
+      .certificate-card img {
+        width: 100%;
+        border-radius: 10px;
+      }
+
+      /* ---------- MODAL ---------- */
+      .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        visibility: hidden;
+        opacity: 0;
+        transition: 0.4s;
+      }
+      .modal.active {
+        visibility: visible;
+        opacity: 1;
+      }
+      .modal img {
+        width: 90%;
+        max-width: 700px;
+        border-radius: 10px;
+        box-shadow: 0 0 40px var(--accent);
+        transform: scale(0.8);
+        animation: zoomIn 0.4s forwards;
+      }
+      @keyframes zoomIn {
+        to {
+          transform: scale(1);
+        }
+      }
+
+      /* ---------- SCROLL TO TOP ---------- */
+      #topBtn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: linear-gradient(45deg, var(--accent), var(--accent2));
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        color: #fff;
+        font-size: 1.5rem;
+        cursor: pointer;
+        box-shadow: 0 0 20px rgba(179, 111, 255, 0.4);
+        display: none;
+      }
+
+      /* ---------- ANIMATIONS ---------- */
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: 1s all ease;
+      }
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ---------- RESPONSIVE ---------- */
+      @media (max-width: 768px) {
+        nav {
+          padding: 15px 20px;
+        }
+        nav ul {
+          display: none;
+        }
+        .hero h1 {
+          font-size: 2rem;
+        }
+        .hero h2 {
+          font-size: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <h1>Gayatri Katole</h1>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#resume">Resume</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#certificates">Certificates</a></li>
+      </ul>
+    </nav>
+
+    <section class="hero" id="home">
+      <h1>Gayatri Katole</h1>
+      <h2>
+        <span class="typing"
+          >I build real-world solutions with design & code</span
+        >
+      </h2>
+      <button
+        onclick="document.querySelector('#about').scrollIntoView({behavior:'smooth'})"
+      >
+        Explore
+      </button>
+    </section>
+
+    <section id="about">
+      <h2 class="section-title">About Me</h2>
+      <div class="about-card reveal">
+        <p>
+          Computer Engineering student passionate about UI/UX, web development,
+          and AI. I enjoy learning continuously, crafting delightful user
+          experiences, and building real-world solutions that merge creativity
+          with logic.
+        </p>
+      </div>
+    </section>
+
+    <section id="services">
+      <h2 class="section-title">Services</h2>
+      <div class="services">
+        <div class="service-card reveal">
+          <h3>UI/UX Design</h3>
+          <p>
+            Design intuitive and aesthetic interfaces with focus on user
+            experience and detail.
+          </p>
+        </div>
+        <div class="service-card reveal">
+          <h3>Web Development</h3>
+          <p>
+            Build responsive, interactive, and modern web applications using
+            clean code.
+          </p>
+        </div>
+        <div class="service-card reveal">
+          <h3>AI & Problem Solving</h3>
+          <p>
+            Leverage AI techniques to solve real-world challenges with
+            innovative solutions.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="resume">
+      <h2 class="section-title">Resume</h2>
+
+      <div class="resume reveal">
+        <!-- BASIC INFO -->
+        <p><strong>Name:</strong> Gayatri Ramesh Katole</p>
+        <p>
+          <strong>Email:</strong>
+          <a href="mailto:gayatrikatole06@gmail.com"
+            >gayatrikatole06@gmail.com</a
+          >
+        </p>
+        <p><strong>Location:</strong> Jalgaon, Maharashtra, India</p>
+        <p>
+          <strong>LinkedIn:</strong>
+          <a
+            href="https://www.linkedin.com/in/gayatri-katole-16935229a"
+            target="_blank"
+          >
+            linkedin.com/in/gayatri-katole-16935229a
+          </a>
+        </p>
+
+        <br />
+
+        <!-- EDUCATION -->
+        <h3 style="color: #b36fff">Education</h3>
+        <ul>
+          <li>
+            <strong>SSBT'S College of Engineering & Technology, Bambhori</strong
+            ><br />
+            Bachelor of Engineering (Computer Engineering)<br />
+            Jan 2023 – Present
+          </li>
+          <br />
+          <li>
+            <strong>M.J. College</strong><br />
+            HSC (GPA: 71.50)<br />
+            Jun 2022 – Feb 2023
+          </li>
+        </ul>
+
+        <br />
+
+        <!-- TECHNICAL SKILLS -->
+        <h3 style="color: #b36fff">Technical Skills</h3>
+        <ul>
+          <li>
+            <strong>Programming Languages:</strong> Python, JavaScript, Dart,
+            C++/Java
+          </li>
+          <li>
+            <strong>Core Computer Science:</strong> Data Structures, OOP
+            Concepts, DBMS, Time Complexity Analysis
+          </li>
+          <li>
+            <strong>Web Development:</strong> HTML5, CSS3, JavaScript (ES6+),
+            React.js
+          </li>
+          <li>
+            <strong>Tools & Technologies:</strong> Git, GitHub, VS Code, Android
+            Studio
+          </li>
+        </ul>
+
+        <br />
+
+        <!-- EXPERIENCE -->
+        <h3 style="color: #b36fff">Experience</h3>
+        <ul>
+          <li>
+            <strong>Artificial Intelligence Intern</strong><br />
+            Edunet Foundation | India<br />
+            Jun 2025 – Present
+          </li>
+          <br />
+          <li>
+            <strong>UI/UX Intern</strong><br />
+            UptoSkills | Online<br />
+            Feb 2025 – May 2025
+            <ul>
+              <li>User research</li>
+              <li>Wireframing & prototyping</li>
+              <li>UI design & usability testing</li>
+              <li>Collaboration & feedback</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section id="skills">
+      <h2 class="section-title">Skills</h2>
+      <div class="skills-grid reveal">
+        <span class="skill-tag">C</span>
+        <span class="skill-tag">C++</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">HTML</span>
+        <span class="skill-tag">CSS</span>
+        <span class="skill-tag">Figma</span>
+        <span class="skill-tag">DSA</span>
+        <span class="skill-tag">AI</span>
+      </div>
+    </section>
+
+    <section id="certificates">
+      <h2 class="section-title">Certificates</h2>
+      <div class="certificates">
+        <div class="certificate-card reveal" onclick="openModal(this)">
+          <img
+            src="[via.placeholder.com](https://via.placeholder.com/400x250?text=Excel+Certificate)"
+            alt="Excel Certificate"
+          />
+        </div>
+      </div>
+    </section>
+
+    <div class="modal" id="modal">
+      <img src="" alt="Certificate Preview" />
+    </div>
+
+    <button id="topBtn" onclick="scrollToTop()">↑</button>
+
+    <script>
+      /* ---------- SCROLL REVEAL ---------- */
+      const reveals = document.querySelectorAll(".reveal");
+      window.addEventListener("scroll", () => {
+        for (let i = 0; i < reveals.length; i++) {
+          const windowHeight = window.innerHeight;
+          const elementTop = reveals[i].getBoundingClientRect().top;
+          if (elementTop < windowHeight - 100) {
+            reveals[i].classList.add("active");
+          }
+        }
+      });
+
+      /* ---------- SCROLL TO TOP BUTTON ---------- */
+      const topBtn = document.getElementById("topBtn");
+      window.onscroll = function () {
+        if (
+          document.body.scrollTop > 400 ||
+          document.documentElement.scrollTop > 400
+        ) {
+          topBtn.style.display = "block";
+        } else {
+          topBtn.style.display = "none";
+        }
+      };
+      function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      /* ---------- CERTIFICATE MODAL ---------- */
+      function openModal(el) {
+        const modal = document.getElementById("modal");
+        const img = modal.querySelector("img");
+        img.src = el.querySelector("img").src;
+        modal.classList.add("active");
+      }
+      document.getElementById("modal").addEventListener("click", function () {
+        this.classList.remove("active");
+      });
+    </script>
+  </body>
+</html>
