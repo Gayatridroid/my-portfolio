@@ -109,6 +109,5 @@ Please consider giving it a ⭐ on GitHub.
 
 ---
 
-## 📄 License
-
-This project is available under the MIT License.
+## 📄Portfolio link
+https://gayatridroid.github.io/my-portfolio/
