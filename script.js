@@ -116,6 +116,87 @@ document.addEventListener('DOMContentLoaded', () => {
   handleActiveLink();
 
   /* ---------------------------------------------------------------- */
+  /* 3.1 TOUCH SWIPE NAVIGATION                                        */
+  /* ---------------------------------------------------------------- */
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchStartTime = 0;
+
+  function getCurrentSectionId() {
+    const scrollPos = window.scrollY + window.innerHeight * 0.35;
+    let current = sections[0] ? sections[0].getAttribute('id') : null;
+
+    sections.forEach((section) => {
+      const top = section.offsetTop;
+      const height = section.offsetHeight;
+      if (scrollPos >= top && scrollPos < top + height) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    return current;
+  }
+
+  function goToNextSection() {
+    const currentId = getCurrentSectionId();
+    const sectionIds = Array.from(sections).map((section) => section.getAttribute('id'));
+    const currentIndex = sectionIds.indexOf(currentId);
+
+    if (currentIndex >= 0 && currentIndex < sectionIds.length - 1) {
+      const nextSection = document.getElementById(sectionIds[currentIndex + 1]);
+      if (nextSection) {
+        nextSection.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+      }
+    }
+  }
+
+  function goToPreviousSection() {
+    const currentId = getCurrentSectionId();
+    const sectionIds = Array.from(sections).map((section) => section.getAttribute('id'));
+    const currentIndex = sectionIds.indexOf(currentId);
+
+    if (currentIndex > 0) {
+      const prevSection = document.getElementById(sectionIds[currentIndex - 1]);
+      if (prevSection) {
+        prevSection.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+      }
+    }
+  }
+
+  function handleTouchStart(event) {
+    const touch = event.changedTouches[0];
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+    touchStartTime = event.timeStamp;
+  }
+
+  function handleTouchEnd(event) {
+    const touch = event.changedTouches[0];
+    const deltaX = touch.clientX - touchStartX;
+    const deltaY = touch.clientY - touchStartY;
+    const deltaTime = event.timeStamp - touchStartTime;
+
+    const isHorizontalSwipe = Math.abs(deltaX) > 60 && Math.abs(deltaY) < 80 && deltaTime < 500;
+
+    if (isHorizontalSwipe) {
+      if (deltaX < 0) {
+        goToNextSection();
+      } else if (deltaX > 0) {
+        goToPreviousSection();
+      }
+    }
+  }
+
+  window.addEventListener('touchstart', handleTouchStart, { passive: true });
+  window.addEventListener('touchend', handleTouchEnd, { passive: true });
+
+  const swipeHint = document.querySelector('.swipe-hint');
+  if (swipeHint && !prefersReducedMotion && isTouchDevice) {
+    setTimeout(() => swipeHint.classList.add('show'), 600);
+    setTimeout(() => swipeHint.classList.remove('show'), 5200);
+  }
+
+  /* ---------------------------------------------------------------- */
   /* 4. HAMBURGER MENU                                                 */
   /* ---------------------------------------------------------------- */
   const hamburger = document.getElementById('hamburger');
